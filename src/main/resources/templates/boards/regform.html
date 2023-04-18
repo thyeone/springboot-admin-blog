@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AdminLTE 3 | Project Add</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
+
+  <div th:replace="~{/nav :: navfragment}" />
+
+  <div th:replace="~{/aside :: asidefragment}" />
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Board Register</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Board Register</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">General</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <form th:action="@{'/boards'}" th:object="${board}" th:method="post">
+                <div class="form-group">
+                  <label for="inputName">Title</label>
+                  <input type="text" th:field="*{title}" id="inputName" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="inputClientCompany">Contents</label>
+                  <input type="text" th:field="*{content}"
+                         id="inputClientCompany" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="inputCategory">Category</label>
+                  <select th:field="*{category}" id="inputCategory" class="form-control">
+                    <option th:value="'engine'" th:text="공학" selected ></option>
+                    <option th:value="'sport'" th:text="예체능계" ></option>
+                    <option th:value="'human'" th:text="인문계" ></option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="inputViews">Views</label>
+                  <input type="text" value="1" name="views"
+                         id="inputViews" class="form-control" readonly>
+                </div>
+                <div class="form-group">
+                  <label for="inputProjectLeader">Writer</label>
+                  <input type="text" th:value="${session.login.getSeq()}" th:name="writerSeq" readonly
+                         id="inputProjectLeader" class="form-control">
+                </div>
+                <div class="col-12">
+                  <input type="submit" value="Register" class="btn btn-success">
+                  <a th:href="@{'/boards'}" class="btn btn-block btn-primary">
+                    목록으로 가기
+                  </a>
+                </div>
+              </form>
+            </div>
+            <!-- /.card-body -->
+
+          </div>
+          <!-- /.card -->
+
+        </div>
+      </div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+      <b>Version</b> 3.2.0
+    </div>
+    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+</body>
+</html>

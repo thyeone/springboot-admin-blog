@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!-- Main Sidebar Container -->
+    <aside th:fragment="asidefragment" class="main-sidebar sidebar-dark-primary elevation-4">
+        <th:block th:if="${session.login != null}">
+            <div th:if="${session.login.deny == 'ben'}"><script>alert('차단된 사용자입니다!')</script></div>
+        </th:block>
+        <!-- Brand Logo -->
+        <a th:href="@{'/'}" class="brand-link">
+            <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+            <span class="brand-text font-weight-light">AdminLTE 3</span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex" th:if="${session.login != null}">
+                <div class="image">
+                    <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                </div>
+                <div class="info">
+                    <a th:href="@{'/members/logout'}" class="d-block">[[${session.login.email}]]
+                        <div>Logout<i class="fas fa-arrow-circle-right right"></i></div>
+                    </a>
+                </div>
+            </div>
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex" th:unless="${session.login != null}">
+                <div class="image">
+                    <img src="dist/img/AdminLTELogo.png" class="img-circle elevation-2" alt="User Image">
+                </div>
+                <div class="info">
+                    <a th:href="@{'/members/login'}" class="d-block">로그인 전</a>
+                </div>
+            </div>
+
+            <!-- SidebarSearch Form -->
+            <div class="form-inline">
+                <div class="input-group" data-widget="sidebar-search">
+                    <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-sidebar">
+                            <i class="fas fa-search fa-fw"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
+                         with font-awesome or any other icon font library -->
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-copy"></i>
+                            <p>
+                                Members
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item" th:unless="${session.login != null}">
+                                <a th:href="@{'/members/regform'}" class="nav-link" >
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Member Register</p>
+                                </a>
+                            </li>
+                            <li class="nav-item" th:unless="${session.login != null}">
+                                <a th:href="@{'/members/login'}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Member Login</p>
+                                </a>
+                            </li>
+                            <li class="nav-item" th:unless="${session.login eq null}">
+                                <a th:href="@{'/members/' + ${session.login.getSeq()}} " class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Member Info</p>
+                                </a>
+                            </li>
+                            <li class="nav-item" th:if="${session.isadmin} != null and ${session.login} != null">
+                                <a th:href="@{'/members'}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Member List</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-edit"></i>
+                            <p>
+                                Boards
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a th:href="@{'/boards'}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Board List</p>
+                                </a>
+                            </li>
+                            <li class="nav-item" th:if="${session.login != null}">
+                                <a th:href="@{'/boards/regform'}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Board Register</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+    </aside>
+</body>
+</html>
